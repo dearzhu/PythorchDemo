@@ -114,3 +114,6 @@ e 的张量,并且其 .grad 张量的梯度累积。
 print(loss.grad_fn)  # MSELoss
 print(loss.grad_fn.next_functions[0][0])  # Linear
 print(loss.grad_fn.next_functions[0][0].next_functions[0][0])
+"""
+反向传播
+"""
