@@ -117,3 +117,35 @@ print(loss.grad_fn.next_functions[0][0].next_functions[0][0])
 """
 反向传播
 """
+# loss=criterion(output,target)
+# print(loss)
+
+net.zero_grad()  # zeroes the gradient buffers of all parameters
+print('conv1.bias.grad before backward')
+loss.backward()
+print('conv1.bias.grad after backward')
+print(net.conv1.bias.grad)
+
+# 神经网络包包含了各种用来构成深度神经网络构建块的模块和损失函数,一份完整的文档查看[这
+# 里]:(https://pytorch.org/docs/nn)
+# 更新权重
+"""
+weight=weight-learning_rate*gradient
+"""
+
+learning_rate = 0.01
+for f in net.parameters():
+    f.data.sub_(f.grad.data * learning_rate)
+
+"""
+torch.optim  更新规则
+"""
+import torch.optim as  optim
+
+# create your optimizer
+optimzer = optim.SGD(net.parameters(), lr=0.01)
+# in your training loop:
+optimzer.zero_grad()  # zero the gradient buffers
+output=net(output,target)
+loss.backward()
+optimzer.step()  # Does the update
