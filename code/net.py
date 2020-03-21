@@ -146,6 +146,7 @@ import torch.optim as  optim
 optimzer = optim.SGD(net.parameters(), lr=0.01)
 # in your training loop:
 optimzer.zero_grad()  # zero the gradient buffers
-output=net(output,target)
+output=net(input)
+loss=criterion(output,target)
 loss.backward()
 optimzer.step()  # Does the update
